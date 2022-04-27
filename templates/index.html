@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Schema viewer</title>
+
+    <link rel="stylesheet" type="text/css" href="../static/css/bulma.min.css">
+</head>
+<body>
+    <section class="section">
+    {% for prop in properties %}
+
+    <div class="card" style="margin-left: {{ prop.nest_level() - 1 }}em;">
+        <div class="card-content">
+            <strong>{{ prop.name }}</strong>
+            <span class="has-text-grey has-text-weight-normal">{{ prop.type }}</span>
+            {% if prop.deprecated %}<span class="tag is-danger">Deprecated</span>{% endif %}
+            {% if prop.required %}<span class="tag is-warning">Required</span>{% endif %}
+            {% if prop.option %}<span class="tag is-info">Option {{ prop.option }}</span>{% endif %}
+
+            <br>
+
+            {% if prop.description %}
+            <br>
+            <p class="has-text-dark">{{ prop.description }}</p>
+            {% endif %}
+
+            {% if prop.default %}
+            <br>
+            <p class="has-text-dark"><strong>Default</strong>: {{ prop.default }}</p>
+            {% endif %}
+
+            {% if prop.example %}
+            <br>
+            <p class="has-text-dark"><strong>Example</strong>: {{ prop.example }}</p>
+            {% endif %}
+
+            {% if prop.pattern %}
+            <br>
+            <p class="has-text-dark"><strong>Pattern</strong>: <code>{{ prop.pattern }}</code></p>
+            {% endif %}
+
+            {% if prop.min_items %}
+            <br>
+            <p><strong>Min items</strong>: {{ prop.min_items }}</p>
+            {% endif %}
+
+            {% if prop.max_items %}
+            <br>
+            <p><strong>Max items</strong>: {{ prop.max_items }}</p>
+            {% endif %}
+
+            {% if prop.enum %}
+            <br>
+            <div class="content">
+                <p><strong>Possible values</strong>:</p>
+                <ul>
+                    {% for val in prop.enum %}
+                    <li>{{ val }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+            {% endif %}
+        </div>
+    </div><br>
+
+    {% endfor %}
+    </section>
+</body>
+</html>
