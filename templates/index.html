@@ -18,6 +18,8 @@
             {% if prop.deprecated %}<span class="tag is-danger">Deprecated</span>{% endif %}
             {% if prop.required %}<span class="tag is-warning">Required</span>{% endif %}
             {% if prop.option %}<span class="tag is-info">Option {{ prop.option }}</span>{% endif %}
+            {% if prop.condition %}<span class="tag is-info">{{ prop.condition }}</span>{% endif %}
+            <br><span class="has-text-grey is-size-7">{{ prop.path }}</span>
 
             <br>
 
