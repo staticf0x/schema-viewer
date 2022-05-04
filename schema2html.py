@@ -50,8 +50,8 @@ class Property:
         while p.parent:
             parts.append(p.name)
             p = p.parent
-
-        parts.append("product_version")
+        else:
+            parts.append(p.name)
 
         return ".".join(parts[::-1])
 
@@ -180,7 +180,9 @@ if __name__ == "__main__":
     print("Gathering data...")
     data = {"properties": []}
 
-    root = Property("<root>", schema_all["type"], False, schema_all["description"], "")
+    root_name = os.path.splitext(os.path.basename(args.root))[0]
+
+    root = Property(root_name, schema_all["type"], False, schema_all["description"], "")
     data["properties"].append(root)
     data["properties"] = load_properties(schema_all, root)
 
@@ -194,7 +196,9 @@ if __name__ == "__main__":
 
     os.makedirs("build", exist_ok=True)
 
-    with open("build/index.html", "w") as fwrite:
+    output_path = os.path.join("build", f"{root_name}.html")
+
+    with open(output_path, "w") as fwrite:
         fwrite.write(output)
 
-    print("Output written to: build/index.html")
+    print(f"Output written to: {output_path}")
