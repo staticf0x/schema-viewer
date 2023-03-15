@@ -6,7 +6,6 @@ from typing import List
 
 import jsonref
 import yaml
-from devtools import debug
 from jinja2 import Environment, FileSystemLoader
 
 from schema_viewer.helpers import extract_default, format_description
