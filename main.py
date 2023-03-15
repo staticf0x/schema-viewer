@@ -1,6 +1,7 @@
 import argparse
 import os
 from dataclasses import dataclass, field
+from pathlib import Path
 from typing import List
 
 import jsonref
@@ -13,6 +14,9 @@ from schema_viewer.helpers import extract_default, format_description
 # TODO:
 #   - Format descriptions as markdowns
 
+ROOT_DIR = Path(__file__).parent
+TEMPLATES_DIR = ROOT_DIR / "templates"
+BUILD_DIR = ROOT_DIR / "build"
 
 @dataclass
 class Property:
@@ -191,20 +195,20 @@ def main():
     print("Rendering...")
 
     # Render
-    loader = FileSystemLoader("templates")
+    loader = FileSystemLoader(TEMPLATES_DIR)
     env = Environment(loader=loader)
 
     match args.format:
         case "html":
             template = env.get_template("index.html")
-            output_path = os.path.join("build", f"{root_name}.html")
+            output_path = BUILD_DIR / f"{root_name}.html"
         case "md":
             template = env.get_template("index.md")
-            output_path = os.path.join("build", f"{root_name}.md")
+            output_path = BUILD_DIR / f"{root_name}.md"
 
     output = template.render(data)
 
-    os.makedirs("build", exist_ok=True)
+    os.makedirs(BUILD_DIR, exist_ok=True)
 
     with open(output_path, "w") as fwrite:
         fwrite.write(output)
