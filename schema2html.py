@@ -146,9 +146,10 @@ def load_properties(obj, root, option: int = 0, condition: str = ""):
                     condition = "if: "
 
                     for field_name, cond in opt["if"]["properties"].items():
-                        condition += f"{field_name}={cond['const']}"
+                        condition += f"{field_name}={cond.get('const', 'Any')}"
 
-                    props += load_properties(opt["then"], p, n + 1, condition)
+                    if "then" in opt:
+                        props += load_properties(opt["then"], p, n + 1, condition)
                 else:
                     props += load_properties(opt, p, n + 1)
 
