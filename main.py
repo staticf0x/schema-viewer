@@ -163,7 +163,7 @@ def load_properties(obj, root, option: int = 0, condition: str = ""):
     return props
 
 
-if __name__ == "__main__":
+def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("--schema-dir", type=str, required=True, help="Path to the schema dir")
     parser.add_argument("--root", type=str, required=True, help="Root object")
@@ -210,3 +210,7 @@ if __name__ == "__main__":
         fwrite.write(output)
 
     print(f"Output written to: {output_path}")
+
+
+if __name__ == "__main__":
+    main()
