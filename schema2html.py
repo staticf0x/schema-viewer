@@ -53,7 +53,7 @@ class Property:
         else:
             parts.append(p.name)
 
-        return ".".join(parts[::-1])
+        return " » ".join(parts[::-1])
 
 
 def _yaml_load(path):
@@ -75,7 +75,7 @@ def load_properties(obj, root, option: int = 0, condition: str = ""):
             name=name,
             type=prop.get("type", "?"),
             deprecated=prop.get("deprecated", False),
-            description=description,
+            description=description.strip(),
             default=extract_default(prop.get("description", "")),
             example=prop.get("example"),
             properties=[],
