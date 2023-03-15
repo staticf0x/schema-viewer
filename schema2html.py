@@ -167,6 +167,7 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser()
     parser.add_argument("--schema-dir", type=str, required=True, help="Path to the schema dir")
     parser.add_argument("--root", type=str, required=True, help="Root object")
+    parser.add_argument("--format", type=str, choices=["html", "md"], default="html", help="Output format")
 
     args = parser.parse_args()
 
@@ -192,12 +193,18 @@ if __name__ == "__main__":
     # Render
     loader = FileSystemLoader("templates")
     env = Environment(loader=loader)
-    template = env.get_template("index.html")
+
+    match args.format:
+        case "html":
+            template = env.get_template("index.html")
+            output_path = os.path.join("build", f"{root_name}.html")
+        case "md":
+            template = env.get_template("index.md")
+            output_path = os.path.join("build", f"{root_name}.md")
+
     output = template.render(data)
 
     os.makedirs("build", exist_ok=True)
-
-    output_path = os.path.join("build", f"{root_name}.html")
 
     with open(output_path, "w") as fwrite:
         fwrite.write(output)
