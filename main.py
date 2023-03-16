@@ -171,6 +171,7 @@ def main():
     parser.add_argument("--schema-dir", type=str, required=True, help="Path to the schema dir")
     parser.add_argument("--root", type=str, required=True, help="Root object")
     parser.add_argument("--format", type=str, choices=["html", "md"], default="html", help="Output format")
+    parser.add_argument("--title", type=str, help="Document title")
 
     args = parser.parse_args()
 
@@ -204,6 +205,11 @@ def main():
         case "md":
             template = env.get_template("index.md")
             output_path = BUILD_DIR / f"{root_name}.md"
+
+    if args.title:
+        data["title"] = args.title
+    else:
+        data["title"] = f"{root_name} schema"
 
     output = template.render(data)
 

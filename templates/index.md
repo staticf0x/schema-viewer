@@ -1,4 +1,4 @@
-# Product Version Schema
+# {{ title }}
 
 {% for prop in properties %}
 ## {{ prop.name }}
