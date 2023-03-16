@@ -5,6 +5,8 @@ def test_extract_default():
     assert extract_default("Default value is true") == "true"
     assert extract_default("Default value is true.") == "true"
     assert extract_default("Default value is false") == "false"
+    assert extract_default("The default value is false") == "false"
+    assert extract_default("The default value is true") == "true"
 
 
 def test_format_description():
