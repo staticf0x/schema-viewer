@@ -112,6 +112,7 @@ def load_properties(obj: Property, root: Property, option: int = 0, condition: s
 
 
 def _yaml_load(path: str):
+    """Loader function for the schema."""
     with open(path) as f:
         return yaml.safe_load(f.read())
 
@@ -135,7 +136,9 @@ class Loader:
         )
 
         root = Property(
-            name=self.root_name, type=schema_all["type"], description=schema_all["description"],
+            name=self.root_name,
+            type=schema_all["type"],
+            description=schema_all["description"],
         )
 
         properties = [root]

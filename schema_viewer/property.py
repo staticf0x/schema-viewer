@@ -1,8 +1,11 @@
+"""Class representing a jsonschema property."""
 from dataclasses import dataclass, field
 
 
 @dataclass
 class Property:
+    """Class representing a jsonschema property."""
+
     name: str
     type: str
     deprecated: bool = False
