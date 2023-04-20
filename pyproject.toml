@@ -28,3 +28,43 @@ target-version = ["py311"]
 
 [tool.isort]
 profile = "black"
+
+[tool.ruff]
+select = [
+    "A",
+    "ANN",
+    "ARG",
+    "B",
+    "BLE",
+    "C4",
+    "C90",
+    "COM",
+    "D",
+    "DTZ",
+    "E",
+    "ERA",
+    "EXE",
+    "F",
+    "FBT",
+    "G",
+    "ICN",
+    "ISC",
+    "PIE",
+    "PL",
+    "PT",
+    "PTH",
+    "PYI",
+    "Q",
+    "RET",
+    "RSE",
+    "RUF",
+    "S",
+    "SIM",
+    "T10",
+    "TCH",
+    "TID",
+    "UP",
+    "W",
+    "YTT",
+]
+line-length = 100
