@@ -51,11 +51,11 @@ def load_properties(obj: Property, root: Property, option: int = 0, condition: s
             deprecated=prop.get("deprecated", False),
             description=description.strip(),
             default=extract_default(prop.get("description", "")),
-            example=prop.get("example"),
+            example=prop.get("example", ""),
             properties=[],
             parent=root,
             required=name in required,
-            pattern=prop.get("pattern"),
+            pattern=prop.get("pattern", ""),
             option=option,
             condition=condition,
         )
