@@ -83,7 +83,7 @@ def load_properties(obj: Property, root: Property, option: int = 0, condition: s
             if items.get("allOf"):
                 for n, opt in enumerate(prop["items"]["allOf"]):
                     if "if" in opt:
-                        condition = "if: "
+                        condition = ""
 
                         for field_name, cond in opt["if"]["properties"].items():
                             condition += f"{field_name}=={cond['const']}"
@@ -106,7 +106,7 @@ def load_properties(obj: Property, root: Property, option: int = 0, condition: s
                 if "if" in opt and "properties" not in opt:
                     # If `if` and `properties` are both in `opt`,
                     # then the `if` is for top-level required properties
-                    condition = "if: "
+                    condition = ""
 
                     for field_name, cond in opt["if"]["properties"].items():
                         condition += f"{field_name}=={cond.get('const', 'Any')}"
