@@ -8,6 +8,32 @@ from schema_viewer.helpers import extract_default, format_description
 from schema_viewer.property import Property
 
 
+def parse_array(p: Property, prop: dict) -> None:
+    """Parse `array` type."""
+    items = prop["items"]
+
+    if items.get("type"):
+        # Type of child items
+        p.type = f"array[{items['type']}]"
+
+    if items.get("enum"):
+        parse_enum(p, items)
+
+    p.min_items = prop.get("minItems", 0)
+    p.max_items = prop.get("maxItems", 0)
+
+    if items.get("pattern"):
+        p.pattern = items["pattern"]
+
+    if items.get("example") and not p.example:
+        p.example = items["example"]
+
+
+def parse_enum(p: Property, prop: dict) -> None:
+    """Parse `enum` properties."""
+    p.enum = prop["enum"]
+
+
 def load_properties(obj: Property, root: Property, option: int = 0, condition: str = ""):
     """Load properties for an object."""
     props = []
@@ -35,26 +61,10 @@ def load_properties(obj: Property, root: Property, option: int = 0, condition: s
         )
 
         if p.type == "array":
-            items = prop["items"]
-
-            if items.get("type"):
-                p.type = f"array[{items['type']}]"
-
-            if items.get("enum"):
-                enum_values = items["enum"]
-                p.enum = enum_values
-
-            p.min_items = prop.get("minItems", 0)
-            p.max_items = prop.get("maxItems", 0)
-
-            if items.get("pattern"):
-                p.pattern = items["pattern"]
-
-            if items.get("example") and not p.example:
-                p.example = items["example"]
+            parse_array(p, prop)
 
         if prop.get("enum"):
-            p.enum = prop["enum"]
+            parse_enum(p, prop)
 
         props.append(p)
 
