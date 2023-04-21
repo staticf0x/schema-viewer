@@ -86,7 +86,7 @@ def load_properties(obj: Property, root: Property, option: int = 0, condition: s
                         condition = "if: "
 
                         for field_name, cond in opt["if"]["properties"].items():
-                            condition += f"{field_name}={cond['const']}"
+                            condition += f"{field_name}=={cond['const']}"
 
                         props += load_properties(opt["then"], p, n + 1, condition)
                     else:
@@ -109,7 +109,7 @@ def load_properties(obj: Property, root: Property, option: int = 0, condition: s
                     condition = "if: "
 
                     for field_name, cond in opt["if"]["properties"].items():
-                        condition += f"{field_name}={cond.get('const', 'Any')}"
+                        condition += f"{field_name}=={cond.get('const', 'Any')}"
 
                     if "then" in opt:
                         props += load_properties(opt["then"], p, n + 1, condition)
