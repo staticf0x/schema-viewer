@@ -42,7 +42,7 @@ class Property:
         while p.parent:
             parts.append(p.name)
             p = p.parent
-        else:
-            parts.append(p.name)
+
+        parts.append(p.name)
 
         return " » ".join(parts[::-1])
