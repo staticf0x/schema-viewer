@@ -36,7 +36,7 @@ def parse_enum(p: Property, prop: dict) -> None:
 
 def load_properties(obj: Property, root: Property, option: int = 0, condition: str = ""):
     """Load properties for an object."""
-    props = []
+    props: list[Property] = []  # Output list for all parsed properties
 
     required = obj.get("required", [])
 
@@ -69,6 +69,7 @@ def load_properties(obj: Property, root: Property, option: int = 0, condition: s
         props.append(p)
 
         if prop.get("items"):
+            # An array of items with a conditional inside
             items = prop["items"]
 
             if items.get("oneOf"):
@@ -91,6 +92,7 @@ def load_properties(obj: Property, root: Property, option: int = 0, condition: s
                     else:
                         props += load_properties(opt, p, n + 1)
 
+        # Non-array properties with conditionals
         if prop.get("oneOf"):
             for n, opt in enumerate(prop["oneOf"]):
                 props += load_properties(opt, p, n + 1)
