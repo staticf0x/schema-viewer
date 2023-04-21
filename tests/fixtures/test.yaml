@@ -1,0 +1,7 @@
+type: object
+description: Test object
+
+properties:
+  name:
+    type: string
+    description: Name of the object
