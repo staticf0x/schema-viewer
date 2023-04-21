@@ -29,6 +29,7 @@ def load_properties(obj: Property, root: Property, option: int = 0, condition: s
             properties=[],
             parent=root,
             required=name in required,
+            pattern=prop.get("pattern"),
             option=option,
             condition=condition,
         )
