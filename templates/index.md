@@ -5,7 +5,7 @@
 
 {% if prop.deprecated %}<span style="color: red;">Deprecated</span><br>{% endif %}
 
-<small>Path: {{ prop.path }}</small><br>
+<small>Path: {% if prop.source_url %}[{{ prop.path }}]({{ prop.source_url }}){% else %}{{ prop.path }}{% endif %}</small><br>
 
 {% if prop.required %}**Required**{% endif %}
 
