@@ -21,6 +21,7 @@ class Property:
     pattern: str = ""
     option: int = 0
     condition: str = ""
+    source_url: str = ""
 
     def nest_level(self) -> int:
         """Return an integer with how nested the property is."""
